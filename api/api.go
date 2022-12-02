@@ -13,6 +13,7 @@ func GetRouter() {
 	user := router.Group("/user")
 	{
 		user.GET("/test", h.GetString)
+		user.GET("/test_endpoint", h.TestEndpoint)
 	}
 
 	database := router.Group("/database")
