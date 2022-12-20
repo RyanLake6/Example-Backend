@@ -6,6 +6,6 @@ import (
 
 func GetString(gctx *gin.Context) {
 	gctx.JSON(200, gin.H{
-		"message": "Hello world",
+		"message": "Hello world this is the second iteration",
 	})
 }
