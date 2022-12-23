@@ -1,28 +1,34 @@
 package handlers
 
 import (
-	"backend/database"
-
 	"github.com/gin-gonic/gin"
 )
 
-type Album struct {
-	ID     int64
-	Title  string
-	Artist string
-	Price  float32
+type User struct {
+	ID    int64
+	Name  string
+	Phone string
 }
 
 func ViewDatabase(gctx *gin.Context) {
-	var albums []Album
-	rows, _ := database.DB.Query("SELECT * FROM album")
-	defer rows.Close()
-	for rows.Next() {
-		var alb Album
-		rows.Scan(&alb.ID, &alb.Title, &alb.Artist, &alb.Price)
-		albums = append(albums, alb)
-	}
-	rows.Err()
+	// var users []User
+	// rows, err := database.DB.Query("SELECT * FROM User")
+	// if err != nil {
+	// 	log.Fatal("Query failed:", err)
+	// 	//gctx.Status(http.StatusInternalServerError)
+	// 	//return
+	// }
+	// defer rows.Close()
+	// for rows.Next() {
+	// 	var alb User
+	// 	rows.Scan(&alb.ID, &alb.Name, &alb.Phone)
+	// 	users = append(users, alb)
+	// }
+	// rows.Err()
 
-	gctx.JSON(200, albums)
+	// gctx.JSON(200, users)
+
+	gctx.JSON(200, gin.H{
+		"message": "Temporarily commented out this api endpoint",
+	})
 }

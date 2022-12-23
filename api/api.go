@@ -2,13 +2,18 @@ package api
 
 import (
 	h "backend/api/handlers"
+	"backend/database"
 
 	"github.com/gin-gonic/gin"
 )
 
-func GetRouter() {
+type Client struct {
+	Database *database.Database
+}
+
+func (c *Client) GetRouter() (r *gin.Engine) {
 	router := gin.Default()
-	//router.SetTrustedProxies([]string{"192.168.1.2"})  not safe to trust all proxies (research this)
+	//router.SetTrustedProxies([]string{"192.168.1.2"})  not safe to trust all proxies
 
 	user := router.Group("/user")
 	{
@@ -20,7 +25,10 @@ func GetRouter() {
 	{
 		user.GET("/database", h.GetDatabase)
 		database.GET("/viewall", h.ViewDatabase)
+		database.GET("/testing_viewall", c.handleViewDatabase)
 	}
 
-	router.Run(":8080")
+	return router
+
+	//router.Run(":8080")
 }
