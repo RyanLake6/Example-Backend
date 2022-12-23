@@ -11,7 +11,7 @@ type Client struct {
 	Database *database.Database
 }
 
-func (c *Client) GetRouter() (r *gin.Engine) {
+func (c *Client) CreateRouter() (r *gin.Engine) {
 	router := gin.Default()
 	//router.SetTrustedProxies([]string{"192.168.1.2"})  not safe to trust all proxies
 
