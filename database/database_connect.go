@@ -9,7 +9,6 @@ import (
 
 	"cloud.google.com/go/cloudsqlconn"
 	"github.com/go-sql-driver/mysql"
-	"github.com/joho/godotenv"
 )
 
 type Database struct {
@@ -21,10 +20,8 @@ type Database struct {
 func ConnectWithConnector(DB_USER *string, DB_PASS *string, DB_NAME *string, INSTANCE_CONNECTION_NAME *string) (*Database, error) {
 	var database Database
 
-	// loading in the .env file for environment variables
-	err := godotenv.Load("./.env")
-	if err != nil {
-		return nil, fmt.Errorf("Couldn't load env variables: %v", err)
+	if *DB_USER == "" || *DB_PASS == "" || *DB_NAME == "" || *INSTANCE_CONNECTION_NAME == "" {
+		return nil, fmt.Errorf("Couldn't load env variables")
 	}
 
 	var (
@@ -74,9 +71,9 @@ func (d *Database) GetUser() ([]User, error) {
 	users := []User{}
 	defer rows.Close()
 	for rows.Next() {
-		var alb User
-		rows.Scan(&alb.ID, &alb.Name, &alb.Phone)
-		users = append(users, alb)
+		var u User
+		rows.Scan(&u.ID, &u.Name, &u.Phone)
+		users = append(users, u)
 	}
 	rows.Err()
 
