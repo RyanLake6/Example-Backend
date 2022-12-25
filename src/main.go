@@ -3,6 +3,7 @@ package main
 import (
 	"backend/api"
 	"backend/database"
+	"backend/logic"
 	"log"
 
 	"github.com/joho/godotenv"
@@ -25,7 +26,7 @@ func main() {
 	}
 
 	// Creating router and endpoints
-	c := &api.Client{Database: db}
+	c := &api.Client{Logic: &logic.Logic{Database: db}}
 	router := c.CreateRouter()
 
 	// Running the backend server

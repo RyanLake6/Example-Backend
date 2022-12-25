@@ -2,13 +2,14 @@ package api
 
 import (
 	h "backend/api/handlers"
-	"backend/database"
+	"backend/logic"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Client struct {
-	Database *database.Database
+	//Database *database.Database
+	Logic *logic.Logic
 }
 
 func (c *Client) CreateRouter() (r *gin.Engine) {
@@ -26,6 +27,7 @@ func (c *Client) CreateRouter() (r *gin.Engine) {
 		user.GET("/database", h.GetDatabase)
 		database.GET("/viewall", h.ViewDatabase)
 		database.GET("/testing_viewall", c.handleViewDatabase)
+		database.GET("/testing_logic", c.handleViewDatabase)
 	}
 
 	return router
