@@ -59,9 +59,11 @@ func ConnectWithConnector(DB_USER *string, DB_PASS *string, DB_NAME *string, INS
 }
 
 type User struct {
-	ID    int64
-	Name  string
-	Phone string
+	UUID       int64
+	Phone      string
+	First_name string
+	Last_name  string
+	Password   string
 }
 
 func (d *Database) GetUser() ([]User, error) {
@@ -75,7 +77,7 @@ func (d *Database) GetUser() ([]User, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var u User
-		rows.Scan(&u.ID, &u.Name, &u.Phone)
+		rows.Scan(&u.UUID, &u.Phone, &u.First_name, &u.Last_name, &u.Password)
 		users = append(users, u)
 	}
 	rows.Err()
