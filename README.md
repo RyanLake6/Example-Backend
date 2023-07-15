@@ -1,4 +1,4 @@
-## Backend for Chore Project
+## Example Go Backend
 
 # API endpoints
 
